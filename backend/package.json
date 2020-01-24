@@ -1,0 +1,51 @@
+{
+  "name": "Martian",
+  "version": "0.0.1",
+  "description": "A backend system for Martian rationing system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha",
+    "preinstall": "npm install -g forever nodemon"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "*",
+    "babel-plugin-transform-promise-to-bluebird": "^1.1.1",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015-node5": "*",
+    "babel-preset-stage-3": "*"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "config": "^1.21.0",
+    "express": "^4.16.3",
+    "lodash": "^4.17.2",
+    "method-override": "^2.3.6",
+    "mocha": "^7.0.0",
+    "mongoose": "^5.7.5",
+    "morgan": "^1.7.0",
+    "multer": "^1.3.0",
+    "nodemon": "^1.18.10",
+    "path": "^0.12.7",
+    "request": "^2.79.0",
+    "rxjs": "^6.4.0",
+    "validator": "^10.11.0",
+    "winston": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "training",
+    "automation"
+  ],
+  "author": "CIS",
+  "contributors": [],
+  "license": "MIT"
+}

@@ -67,7 +67,7 @@ export default class RationController {
      
     Ration.deleteOne({_id : req.params.id})
     .then((resp) =>{
-      Responder.success(res,{msg: "Ration successfully deleted."})
+      Responder.success(res,{msg: "Ration successfully deleted!"})
     })
     .catch((err) =>{
       Responder.operationFailed(res,err);
@@ -125,7 +125,6 @@ export default class RationController {
             }
             schedule.push(main_obj);
             foodPackets[index] = null
-            console.log("schedul1111===========================")
           }else{
             if(schedule.length > 0){
               schedule.forEach((value1,index2) =>{
@@ -133,7 +132,6 @@ export default class RationController {
                 var total_cal = _.sumBy(value1.packets, function(o) { return o.calories; });
                 console.log(total_cal)
                 if(!value1.is_done){
-                  console.log("schedule.length > 0",total_cal < 2500)
                   let tempc = total_cal + element.calories;
                   if(tempc >=2500){
                   schedule[index2].is_done = true;                
@@ -155,7 +153,6 @@ export default class RationController {
                 }
                 schedule.push(main_obj);
                 foodPackets[index] = null
-                console.log("schedule222===========================")
               }
               
 
@@ -169,7 +166,6 @@ export default class RationController {
                 is_done : false
               }
               schedule.push(main_obj);
-              console.log("schedule===========================")
               foodPackets[index] = null
             }
       
@@ -197,12 +193,15 @@ export default class RationController {
             // var total_water = 0
             if(w1 != null){
              var total_water = _.sumBy(sch.packets, function(val) {return val.qty_ltr?val.qty_ltr:0;});
-            // console.log("total_water",total_water)  
+             console.log("total_water",total_water)  
              if(total_water < 2){
                if(w1.qty_ltr > 1 || total_water > 1){
                  schedule[schIndex].is_done = true;
                }else{
                  schedule[schIndex].is_done = false;
+               }
+               if(w1.qty_ltr +total_water > 1 ){
+                schedule[schIndex].is_done = true;
                }
                schedule[schIndex].packets.push(w1);
                waterPackets[index2] = null;
@@ -231,6 +230,7 @@ function(err, results) {
     Responder.operationFailed(res ,err)
   }
   if(results){
+    console.log(schedule)
     Responder.success(res, scheduledArr)
   }
 

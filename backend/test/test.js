@@ -7,7 +7,7 @@ var should = chai.should();
 chai.use(chaiHttp);
 var server =  require('../server.js');
 var host = 'http://localhost:3002';
-var Ration = require('../app/models').ration
+var Ration = require('../app/models').Ration
 
 //Our parent block
 describe(`Ration`, () => {
@@ -16,9 +16,9 @@ describe(`Ration`, () => {
         chai.request(host)
           .get(`/api/ration/get-ration`)
           .end((err, res) => {
-                (res).should.have.status(200);
-                (res.body).should.be.a(`object`);
-                (res.body.data).should.be.a('array');
+                res.should.have.status(200);
+                res.body.should.be.a(`object`);
+                res.body.data.should.be.a('array');
                // (res.body).length.should.be.eql(0);
 
                 done();
@@ -83,16 +83,14 @@ describe(`Ration`, () => {
         let ration = new Ration({
         pack_id: "W1",
         type: "Water",
-        qty_ltr :2,})
+        qty_ltr :2})
         ration.save((err, ration) => {
-              chai.request(server)
-              .delete('/delete-ration/' + ration._id)
+              chai.request(host)
+              .delete('/api/ration/delete-ration/'+ration._id)
               .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('msg').eql('Ration successfully deleted!');
-                    res.body.result.should.have.property('ok').eql(1);
-                    res.body.result.should.have.property('n').eql(1);
                 done();
               });
         });
